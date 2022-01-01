@@ -20,3 +20,65 @@ Future<StudentModel?>getStudent()async{
     print("Get student error");
   }
 }
+Future<StudentDet?>getStudentDet(id)async{
+  try {
+    var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/students/$id?api_key=5b4DB');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      print(response.body);
+      return StudentDet.fromJson(jsonDecode(response.body));
+    } else {
+      print(response.statusCode.toString());
+    }
+  } catch (e) {
+    print("Get student Details error");
+  }
+}
+
+
+
+getSubjects()async{
+  try {
+    var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/subjects?api_key=5b4DB');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      Map<String,dynamic> res=jsonDecode(response.body);
+      return res;
+    } else {
+      print(response.statusCode.toString());
+    }
+  } catch (e) {
+    print("Get student error");
+  }
+}
+getSubjectDet(id)async{
+  try {
+    var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/subjects/$id?api_key=5b4DB');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      Map<String,dynamic> res=jsonDecode(response.body);
+      print(res);
+      return res;
+    } else {
+      print(response.statusCode.toString());
+    }
+  } catch (e) {
+    print("Get student error");
+  }
+}
+
+
+getClassrooms()async{
+  try {
+    var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/classrooms?api_key=5b4DB');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      Map<String,dynamic> res=jsonDecode(response.body);
+      return res;
+    } else {
+      print(response.statusCode.toString());
+    }
+  } catch (e) {
+    print("Get student error");
+  }
+}

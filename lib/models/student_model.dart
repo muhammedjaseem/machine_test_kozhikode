@@ -51,3 +51,36 @@ class Student {
     "name": name == null ? null : name,
   };
 }
+
+
+StudentDet studentDetFromJson(String str) => StudentDet.fromJson(json.decode(str));
+
+String studentDetToJson(StudentDet data) => json.encode(data.toJson());
+
+class StudentDet {
+  StudentDet({
+    this.age,
+    this.email,
+    this.id,
+    this.name,
+  });
+
+  int? age;
+  String? email;
+  int? id;
+  String? name;
+
+  factory StudentDet.fromJson(Map<String, dynamic> json) => StudentDet(
+    age: json["age"] == null ? null : json["age"],
+    email: json["email"] == null ? null : json["email"],
+    id: json["id"] == null ? null : json["id"],
+    name: json["name"] == null ? null : json["name"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "age": age == null ? null : age,
+    "email": email == null ? null : email,
+    "id": id == null ? null : id,
+    "name": name == null ? null : name,
+  };
+}

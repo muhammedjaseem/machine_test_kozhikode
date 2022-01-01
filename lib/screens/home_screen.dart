@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_test_kozhikode/providers/provider_home.dart';
+import 'package:machine_test_kozhikode/screens/student_details.dart';
 import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,18 +27,31 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(child: Text("STUDENTS",style: GoogleFonts.poppins(fontSize: 30,wordSpacing: 2,fontWeight: FontWeight.bold),)),
+
             Expanded(
               child: Consumer<ProviderHome>(builder:(context,data,child){
                 return data.isstudentLoasding ==false?ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
                   itemCount: data.studentModel?.students?.length,
                     itemBuilder: (context,index){
-                  return ListTile(
-                    leading: Text(
-                      '${data.studentModel?.students?[index].name}'
-                    ),
-                    title: Text(
-                        '${data.studentModel?.students?[index].name}'
-                    ),
+                  return Column(
+                    children: [
+                      ListTile(
+                        onTap: (){
+                          data.getStudentDetail(data.studentModel?.students?[index].id);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentDetails()));
+                        },
+                        style: ListTileStyle.drawer,
+                        leading: Text(
+                          '${data.studentModel?.students?[index].id}.'
+                        ),
+                        title: Text(
+                            '${data.studentModel?.students?[index].name}'
+                        ),
+                      ),
+                      Divider(),
+                    ],
                   );
                 }): const CupertinoActivityIndicator();
               }),

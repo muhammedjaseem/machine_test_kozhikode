@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test_kozhikode/providers/provider_home.dart';
 import 'package:machine_test_kozhikode/screens/home_screen.dart';
+import 'package:machine_test_kozhikode/screens/subjects_screens.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Machine Test',
         theme: ThemeData(
         ),
-        home: const HomeScreen(),
+        home: const SubjectsScreen(),
       ),
     );
   }
