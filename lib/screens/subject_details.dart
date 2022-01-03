@@ -21,7 +21,7 @@ class SubjectDetails extends StatelessWidget {
                 ,),
             ),),
           body: Consumer<ProviderHome>(builder: (context,data,child){
-            return data.issbjectDetLoading ==false || data.classroomdetails !=null?Column(
+            return data.issbjectDetLoading ==false || data.subjectDet.isNotEmpty?Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -36,20 +36,20 @@ class SubjectDetails extends StatelessWidget {
                       children: [
                         ListTile(leading: CustomText(text: 'ID:',size: 20,),
                           dense: true,
-                          title: CustomText(text: '${data.subjectDet['id']}',size: 22,),),
+                          title: CustomText(text: '${data.subjectDet?['id'] ?? ""}',size: 22,),),
                         ListTile(leading: CustomText(text: 'Subject Name:',size: 18,),
                           dense: true,
-                          title: CustomText(text: '${data.subjectDet['name']}',size: 18,color: Colors.red),),
+                          title: CustomText(text: '${data.subjectDet?['name'] ?? ""}',size: 18,color: Colors.red),),
                         ListTile(
                           dense: true,
                           leading: CustomText(text: 'Teacher:',size: 16,),
-                          title: CustomText(text: '${data.subjectDet['teacher']}',size: 16,color: Colors.red),)
+                          title: CustomText(text: '${data.subjectDet?['teacher'] ?? ""}',size: 16,color: Colors.red),)
                       ],
                     ),
                   ),
                 ),
               ],
-            ):CupertinoActivityIndicator();
+            ):const Center(child: CupertinoActivityIndicator());
           })
       ),
     );

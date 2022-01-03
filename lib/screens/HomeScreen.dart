@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Options'),
+          title: const Text('Home'),
           bottom: const TabBar(
             indicatorSize: TabBarIndicatorSize.label,
             tabs: [

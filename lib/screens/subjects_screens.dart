@@ -26,7 +26,7 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
           children: [
             SizedBox(height: 20,),
             Consumer<ProviderHome>(builder:(context,data,child){
-              if (data.isSubjectloading ==false) {
+              if (data.isSubjectloading ==false && data.subjects !=[]) {
                 //List<dynamic>rep=data.subjects['subjects'];
                 return ListView.builder(
                   shrinkWrap: true,

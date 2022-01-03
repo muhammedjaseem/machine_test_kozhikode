@@ -29,12 +29,12 @@ class _ClassRoomScreenState extends State<ClassRoomScreen> {
           children: [
             SizedBox(height: 20,),
             Consumer<ProviderHome>(builder:(context,data,child){
-              if (data.isclassroomsloading ==false || data.clasrooms !=null) {
+              if (data.isclassroomsloading ==false && data.clasrooms !=null) {
               //  List<dynamic>rep=data.clasrooms['classrooms'];
                 return ListView.builder(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
-                    itemCount: data.clasrooms.length ?? 0,
+                    itemCount: data.clasrooms.length,
                     itemBuilder: (context,index){
                       return Column(
                         children: [

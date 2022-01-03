@@ -59,7 +59,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                             ),
                             dense: true,
                             title: CustomText(
-                              text: '${data.classroomdetails['id']}',
+                              text: '${data.classroomdetails?['id'] ?? ""}',
                               size: 22,
                             ),
                           ),
@@ -70,7 +70,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                             ),
                             dense: true,
                             title: CustomText(
-                                text: '${data.classroomdetails['name']}',
+                                text: '${data.classroomdetails?['name'] ?? ""}',
                                 size: 18,
                                 color: Colors.red),
                           ),
@@ -81,7 +81,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                             ),
                             dense: true,
                             title: CustomText(
-                                text: '${data.classroomdetails['layout']}',
+                                text: '${data.classroomdetails?['layout'] ??""}',
                                 size: 18,
                                 color: Colors.red),
                           ),
@@ -92,7 +92,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                             ),
                             dense: true,
                             title: CustomText(
-                                text: '${data.classroomdetails['size']}',
+                                text: '${data.classroomdetails?['size'] ?? ""}',
                                 size: 18),
                           ),
                           ListTile(
@@ -102,7 +102,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                               size: 16,
                             ),
                             title: CustomText(
-                                text: '${data.classroomdetails['subject']}',
+                                text: '${data.classroomdetails?['subject'] ?? ""}',
                                 size: 16,
                                 color: Colors.red),
                           ),
@@ -112,7 +112,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                             child: Container(
                               height: 50,
                               width: MediaQuery.of(context).size.width,
-                              margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
+                              margin: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.black54),
                                   borderRadius: BorderRadius.circular(7),
@@ -153,7 +153,7 @@ class _ClassRoomDetailsState extends State<ClassRoomDetails> {
                                 i++)
                                 if(selectedsubject ==data.subjects[i]['name']){
                                   print(data.subjects[i]['name']);
-                                  data.assignSubjet(data.classroomdetails['id'], data.subjects[i]['id']);
+                                  data.assignSubjet(context,data.classroomdetails['id'], data.subjects[i]['id']);
                                 }
                                   
                               }, child: CustomText(text: "Assign",color: Colors.white,))),

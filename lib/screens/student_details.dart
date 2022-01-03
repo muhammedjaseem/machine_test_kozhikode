@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:machine_test_kozhikode/providers/provider_home.dart';
 import 'package:machine_test_kozhikode/widgets%20and%20helpers/CustomText.dart';
 import 'package:provider/provider.dart';
-class StudentDetails extends StatelessWidget {
+class StudentDetails extends StatefulWidget {
   const StudentDetails({Key? key}) : super(key: key);
 
+  @override
+  State<StudentDetails> createState() => _StudentDetailsState();
+}
+
+class _StudentDetailsState extends State<StudentDetails> {
+  String? selectedClassroom;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,7 +49,60 @@ class StudentDetails extends StatelessWidget {
                     ListTile(
                       dense: true,
                       leading: CustomText(text: 'Email:',size: 16,),
-                     title: CustomText(text: '${data.studentDet?.email}',size: 16),)
+                     title: CustomText(text: '${data.studentDet?.email}',size: 16),),
+                      CustomText(text: "Assign a Classroom"),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black54),
+                              borderRadius: BorderRadius.circular(7),
+                              color: Colors.yellow),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButton(
+                                value: selectedClassroom,
+                                isExpanded: true,
+                                underline: Container(),
+                                hint: const Text(
+                                  'Assign a Classroom',
+                                  style: TextStyle(),
+                                ),
+                                items: [
+                                  for (var i = 0;
+                                  i < data.subjects.length;
+                                  i++)
+                                    DropdownMenuItem(
+                                      child: Text(data.clasrooms[i]['name']),
+                                      value: data.clasrooms[i]['name'],
+                                    )
+                                ],
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedClassroom =value.toString();
+                                  });
+                                }),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                          height: 40,
+                          width: 100,
+                          child: ElevatedButton(onPressed: (){
+                            for (var i = 0;
+                            i < data.subjects.length;
+                            i++) {
+                              if(selectedClassroom ==data.clasrooms[i]['name'] && data.classroomdetails !=null){
+                                print(data.subjects[i]['name']);
+                                data.assignClassroom(data.studentDet?.id.toString(), data.subjects[i]['id']);
+                              }
+                            }
+
+                          }, child: CustomText(text: "Assign",color: Colors.white,))),
+                      SizedBox(height: 20,)
                     ],
                   ),
                 ),

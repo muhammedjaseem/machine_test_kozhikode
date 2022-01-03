@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:machine_test_kozhikode/apis/apis_home.dart';
 import 'package:machine_test_kozhikode/models/student_model.dart';
@@ -84,7 +86,7 @@ class ProviderHome with ChangeNotifier{
     notifyListeners();
   }
 
-  Future<Response?>assignSubjet(classroomid,subjectid)async{
+  Future<Response?>assignSubjet(BuildContext context,classroomid,subjectid)async{
     print(classroomid.toString() +subjectid.toString());
     try {
       var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/classrooms/$classroomid?api_key=5b4DB');
@@ -92,6 +94,7 @@ class ProviderHome with ChangeNotifier{
         "subject":subjectid.toString()
       });
       if (response.statusCode == 200) {
+        Fluttertoast.showToast(msg: response.body);
         print(response.body);
         getClassroomDetails(classroomid);
         return Response(response.body, 200);
@@ -99,6 +102,27 @@ class ProviderHome with ChangeNotifier{
         print(response.statusCode.toString());
       }
     } catch (e) {
+      print("Assign error");
+    }
+    notifyListeners();
+  }
+  Future<Response?>assignClassroom(studentId,subjectid)async{
+  //  print(classroomid.toString() +subjectid.toString());
+    try {
+      var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/registration/?api_key=5b4DB');
+      var response = await http.post(url,body: {
+        "student":studentId.toString(),
+        "subject":subjectid.toString()
+      });
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(msg: response.body,textColor: Colors.red);
+        print(response.body);
+        return Response(response.body, 200);
+      } else {
+        print(response.statusCode.toString());
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString(),textColor: Colors.red);
       print("Assign error");
     }
     notifyListeners();
