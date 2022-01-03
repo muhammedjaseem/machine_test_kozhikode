@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test_kozhikode/providers/provider_home.dart';
-import 'package:machine_test_kozhikode/screens/home_screen.dart';
+import 'package:machine_test_kozhikode/screens/HomeScreen.dart';
+import 'package:machine_test_kozhikode/screens/classroom_screen.dart';
+import 'package:machine_test_kozhikode/screens/student_screen.dart';
 import 'package:machine_test_kozhikode/screens/subjects_screens.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'Machine Test',
         theme: ThemeData(
         ),
-        home: const SubjectsScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

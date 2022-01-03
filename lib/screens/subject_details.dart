@@ -21,7 +21,7 @@ class SubjectDetails extends StatelessWidget {
                 ,),
             ),),
           body: Consumer<ProviderHome>(builder: (context,data,child){
-            return data.issbjectDetLoading ==false?Column(
+            return data.issbjectDetLoading ==false || data.classroomdetails !=null?Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

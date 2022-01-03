@@ -16,7 +16,6 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<ProviderHome>(context,listen: false).getSubject();
   }
   @override
   Widget build(BuildContext context) {
@@ -25,31 +24,28 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
 
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20,bottom: 20),
-              child: CustomText(text: "SUBJECTS",color: Colors.yellow,size: 30,weight: FontWeight.w600,),
-            ),
+            SizedBox(height: 20,),
             Consumer<ProviderHome>(builder:(context,data,child){
               if (data.isSubjectloading ==false) {
-                List<dynamic>rep=data.subjects['subjects'];
+                //List<dynamic>rep=data.subjects['subjects'];
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: rep.length,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: data.subjects.length,
                   itemBuilder: (context,index){
                     return Column(
                       children: [
                         ListTile(
                           onTap: (){
-                            data.getSubjectDetails(rep[index]['id']);
+                            data.getSubjectDetails(data.subjects[index]['id']);
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>SubjectDetails()));
                           },
                           style: ListTileStyle.drawer,
                           leading: Text(
-                              '${rep[index]['id']}.'
+                              '${data.subjects[index]['id']}.'
                           ),
                           title: Text(
-                              '${rep[index]['name']}.'
+                              '${data.subjects[index]['name']}.'
                           ),
                         ),
                         Divider(),

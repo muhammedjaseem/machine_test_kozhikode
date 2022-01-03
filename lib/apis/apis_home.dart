@@ -43,7 +43,8 @@ getSubjects()async{
     var response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String,dynamic> res=jsonDecode(response.body);
-      return res;
+      List<dynamic>rep=res['subjects'];
+      return rep;
     } else {
       print(response.statusCode.toString());
     }
@@ -68,12 +69,29 @@ getSubjectDet(id)async{
 }
 
 
-getClassrooms()async{
+getClassroom()async{
   try {
     var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/classrooms?api_key=5b4DB');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       Map<String,dynamic> res=jsonDecode(response.body);
+      List<dynamic>rep=res['classrooms'];
+      print(res);
+      return rep;
+    } else {
+      print(response.statusCode.toString());
+    }
+  } catch (e) {
+    print("Get student error");
+  }
+}
+getClassroomtDet(id)async{
+  try {
+    var url = Uri.parse('https://hamon-interviewapi.herokuapp.com/classrooms/$id?api_key=5b4DB');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      Map<String,dynamic> res=jsonDecode(response.body);
+      print(res);
       return res;
     } else {
       print(response.statusCode.toString());
